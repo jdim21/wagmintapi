@@ -3,7 +3,7 @@ import { stringify } from 'querystring';
 import { pool } from './database';
 import { AptosClient, AptosAccount, TokenClient, CoinClient } from "aptos";
 
-const NODE_URL = process.env.APTOS_NODE_URL || "https://fullnode.devnet.aptoslabs.com";
+const NODE_URL = process.env.APTOS_NODE_URL || "https://fullnode.mainnet.aptoslabs.com";
 const aptosCoinStore = "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>";
 // const coinClient = new CoinClient(client);
 // const privateKeyBuffer = Buffer.alloc(32,kPrivKey,'hex');
@@ -122,18 +122,18 @@ export class AppService {
           console.log("uri: " + uri);
           id = res.rows[0]["id"]
           console.log("uri, id: " + uri + ", " + JSON.stringify(id));
-          var collectionName = "TWAG2";
-          var tokenName = "TWAG#" + JSON.stringify(id);
+          var collectionName = "WAG";
+          var tokenName = "WAG#" + JSON.stringify(id);
           const tokenPropertyVersion = 0
           try {
-            // const txnHashCollection = await tokenClient.createCollection(
-            //   kyle,
-            //   collectionName,
-            //   "TWealthyApdogeGang",
-            //   "",
-            //   5000,
-            // );
-            // await client.waitForTransaction(txnHashCollection, { checkSuccess: true });
+            const txnHashCollection = await tokenClient.createCollection(
+              kyle,
+              collectionName,
+              "WealthyApdogeGang",
+              "",
+              5000,
+            );
+            await client.waitForTransaction(txnHashCollection, { checkSuccess: true });
             const updateWagUriHashUsed = {
               name: 'update-wag-nft-used',
               text: `
@@ -151,7 +151,7 @@ export class AppService {
                   kyle,
                   collectionName,
                   tokenName,
-                  "TWealthyApdogGang",
+                  "WealthyApdogeGang",
                   1,
                   uri,
                   1, // TODO: this is the max, is this correct?
@@ -269,7 +269,7 @@ export class AppService {
 
   async getMarkOfferChecked(tokenId: string): Promise<string> {
     return await pool.connect().then(async (client) => {
-      const tokenName = "TWAG#" + tokenId
+      const tokenName = "WAG#" + tokenId
       console.log("tokenId: " + tokenId);
       const updateWagOfferChecked = {
         name: 'update-wag-offers',
