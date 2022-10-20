@@ -126,14 +126,14 @@ export class AppService {
           var tokenName = "WAG#" + JSON.stringify(id);
           const tokenPropertyVersion = 0
           try {
-            const txnHashCollection = await tokenClient.createCollection(
-              kyle,
-              collectionName,
-              "WealthyApdogeGang",
-              "",
-              5000,
-            );
-            await client.waitForTransaction(txnHashCollection, { checkSuccess: true });
+            // const txnHashCollection = await tokenClient.createCollection(
+            //   kyle,
+            //   collectionName,
+            //   "WealthyApdogeGang",
+            //   "",
+            //   5000,
+            // );
+            // await client.waitForTransaction(txnHashCollection, { checkSuccess: true });
             const updateWagUriHashUsed = {
               name: 'update-wag-nft-used',
               text: `
