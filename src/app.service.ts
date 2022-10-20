@@ -28,7 +28,8 @@ export class AppService {
           return 'xxxx';
         });
         // const remaining = 5000 - parseInt(res.rows[0]["count"]);
-        const remaining = parseInt(res.rows[0]["count"])
+        const currCount = parseInt(res.rows[0]["count"])
+        var remaining = Math.max(0, currCount - 500);
         client.release();
         // if (remaining <= 0) {
         //   return "SoldOut";
